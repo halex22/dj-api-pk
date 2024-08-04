@@ -6,9 +6,15 @@ from django.db import models
 class PokemonType(models.Model):
     name = models.CharField(unique=True, max_length=20, null=False, blank=False)
 
+    class Meta:
+        db_table = 'types'
+
 
 class Ability(models.Model):
     name = models.CharField(unique=True, max_length=50, null=False, blank=False)
+
+    class Meta:
+        db_table = 'abilities'
 
 
 class Pokemon(models.Model):
@@ -18,6 +24,9 @@ class Pokemon(models.Model):
     types = models.ManyToManyField(PokemonType, related_name='types')
     abilities = models.ManyToManyField(Ability, related_name='abilities')
     hidden_ability = models.ForeignKey(Ability, on_delete=models.SET_NULL, related_name='hidden_ability', null=True)
+
+    class Meta:
+        db_table = 'pokemons'
 
 
 class BaseStats(models.Model):
@@ -29,6 +38,9 @@ class BaseStats(models.Model):
     sp_def= models.PositiveIntegerField(null= False, blank=False)
     speed= models.PositiveIntegerField(null= False, blank=False)
 
+    class Meta:
+        db_table = 'base_stats'
+
 
 class SmallNameModel(models.Model):
     name = models.CharField(unique=True, max_length=25, null=False, blank=False)
@@ -38,11 +50,16 @@ class SmallNameModel(models.Model):
 
 
 class FriendShipCategory(SmallNameModel):
-    ...
+    
+    class Meta:
+        db_table = 'friendship_categories'
 
 
 class GrowthRateCategory(SmallNameModel):
-    ...
+    
+    class Meta:
+        db_table = 'growth_rate_category'
+
 
 class Training(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name='traning')
@@ -52,14 +69,21 @@ class Training(models.Model):
     base_friendship = models.PositiveIntegerField()
     growth_rate = models.ForeignKey(GrowthRateCategory, on_delete=models.SET_NULL, related_name='growth_rate', null=True)
 
+    class Meta:
+        db_table = 'training_stats'
+
 
 class EggGroup(SmallNameModel):
-    ...
+    
+    class Meta:
+        db_table = 'egg_groups'
 
 
 class EggCyclesCategory(models.Model):
     name = models.CharField(max_length=35, unique=True, blank=False, null=False)
 
+    class Meta:
+        db_table = 'egg_cycles_categories'
 
 class Breeding(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name='breeding')
@@ -70,9 +94,14 @@ class Breeding(models.Model):
     egg_cycles_category = models.ForeignKey(EggCyclesCategory, on_delete=models.SET_NULL, related_name='egg_cycles_category', null=True)
     egg_cycles_value = models.PositiveIntegerField()
 
+    class Meta:
+        db_table = 'breeding_stats'
+
 
 class PokemonGame(SmallNameModel):
-    ...
+    
+    class Meta:
+        db_table = 'pokemon_games'
 
 
 class PokedexEntry(models.Model):
@@ -81,5 +110,6 @@ class PokedexEntry(models.Model):
     entry = models.TextField(null=False, blank=False)
 
 
-
+    class Meta:
+        db_table = 'pokedex_entries'
 
