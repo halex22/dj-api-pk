@@ -1,0 +1,25 @@
+services:
+  app:
+    build: ./app
+    image: pokemon_dj_api
+    container_name: pokemon_dj_api_container
+    ports:
+      -"8000:8000"
+    volumes:
+      - ./app:/app
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - psql
+
+  psql:
+    image: postgres:16-alpine
+    container_name: pokemon_psql_db
+    ports:
+      - 5440:5440
+    env_file:
+      - ./psql/.env
+    volumes:
+      - pokemon_db:/var/lib/postgresql/data
+
+volumes:
+  pokemon_db:    

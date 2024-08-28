@@ -1,9 +1,5 @@
-from os import getenv
+import os
 from pathlib import Path
-
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv('KEY')
+SECRET_KEY = os.environ['key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,11 +65,11 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pokemon_dj',
-        'USER':  getenv('USER_DB'),
-        'PASSWORD':  getenv('PASS_DB'),
-        'HOST': getenv('HOST_DB'),
-        'PORT': getenv('PORT_DB')
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER':  os.environ['POSTGRES_USER'],
+        'PASSWORD':  os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],
+        'PORT': os.environ['POSTGRES_PORT']
     }
 }
 
