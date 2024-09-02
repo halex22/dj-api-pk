@@ -26,11 +26,11 @@ class CleanedBreeding(TypedDict):
 
 
 class CleanedPokemonDict(TypedDict):
-    pokedex_data: CleanedPokedexData
+    pokédex_data: CleanedPokedexData
     base_stats: str
-    trainig: CleanedTraining
+    training: CleanedTraining
     breeding: CleanedBreeding
-    pokedex_entries: str
+    pokédex_entries: str
     types_effect: dict
     img_link: str | None
     other_languages: dict
