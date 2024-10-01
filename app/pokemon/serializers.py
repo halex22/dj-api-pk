@@ -140,6 +140,13 @@ class PokemonSerializer(BasePokemonSerializer):
     #     exclude = [ 'id']
 
 
+class PokemonHintSerializer(ModelSerializer):
+
+    class Meta:
+        model = Pokemon
+        fields = ['name',  'slug']
+
+
 class AbilityByPokemon(BasePokemonSerializer):
     ...
 
