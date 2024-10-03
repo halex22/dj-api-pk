@@ -10,5 +10,9 @@
             "database": "pokemon_db",
             "name": "pokemon_api_connection"
         }
+    ],
+    "cSpell.words": [
+        "corsheaders",
+        "whitenoise"
     ]
 }
