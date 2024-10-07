@@ -1,6 +1,6 @@
 from django.db.models import Model, QuerySet
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
@@ -30,7 +30,8 @@ class PokemonView(RetrieveAPIView):
 
     def get_object(self):
         pokemon_slug = self.kwargs.get('pokemonSlug')
-        return Pokemon.objects.get(slug=pokemon_slug)
+        return get_object_or_404(Pokemon, slug=pokemon_slug)
+        # return Pokemon.objects.get(slug=pokemon_slug)
     
 
 class AbilityView(APIView):
@@ -63,8 +64,7 @@ class AbilityView(ListAPIView):
 
     def get_queryset(self):
         ability_slug = self.kwargs.get('ability_slug')
-        print(self.kwargs)
-        return Pokemon.objects.filter(abilities__slug=ability_slug)
+        return get_list_or_404(Pokemon, abilities__slug=ability_slug)
 
 
 class EggGroupView(ListAPIView):
@@ -74,7 +74,7 @@ class EggGroupView(ListAPIView):
 
     def get_queryset(self):
         slug  = self.kwargs.get('egg_group_slug')
-        return Pokemon.objects.filter(breeding__egg_groups__slug=slug)
+        return get_list_or_404(Pokemon, breeding__egg_groups__slug=slug)
     
 
 class DetailTypeView(ListAPIView):
@@ -84,7 +84,7 @@ class DetailTypeView(ListAPIView):
 
     def get_queryset(self):
         pokemon_type  = self.kwargs.get('type')
-        return Pokemon.objects.filter(types__name=pokemon_type).order_by('national_index')
+        return get_list_or_404(Pokemon.objects.filter(types__name=pokemon_type).order_by('national_index'))
     
 
 class GenerationView(ListAPIView):
@@ -95,7 +95,7 @@ class GenerationView(ListAPIView):
 
     def get_queryset(self):
         gen_id = self.kwargs.get('gen_id')
-        return Pokemon.objects.filter(generation_number=gen_id).order_by('national_index')
+        return get_list_or_404(Pokemon.objects.filter(generation_number=gen_id).order_by('national_index'))
 
 
 class AbilitiesListView(ListAPIView):
