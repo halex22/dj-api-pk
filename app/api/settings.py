@@ -22,7 +22,7 @@ else:
 
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://dj-api-pk-x28c.onrender.com']
 
 
 # Application definition
@@ -148,4 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     ]
 # }
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'https://pokemon-app-frontend-phi.vercel.app'
+]
