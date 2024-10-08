@@ -7,3 +7,4 @@ migrations
 *.sql
 *.sh
 data
+*.dockerignore

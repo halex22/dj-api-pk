@@ -88,10 +88,17 @@ if ENVIRONMENT == 'development':
     }
 
 else:
-    import dj_database_url
+    # import dj_database_url
+    # DATABASES = {
+    #     'default': dj_database_url.parse(environ.get('DATABASE_URL', default='postgresql://'))
+    # }
     DATABASES = {
-        'default': dj_database_url.parse(environ.get('DATABASE_URL', default='postgresql://'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR/  'db.sqlite3',
+        }
     }
+
 
 
 # Password validation

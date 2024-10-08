@@ -17,8 +17,11 @@ def create_entry(pokemon_game: PokemonGame, pokemon_instance: Pokemon, text: str
     return entry
 
 
-def create_pokedex_entries(stats:Dict[str, str], pokemon: Pokemon):
+def create_pokedex_entries(stats: Dict[str, str] | None, pokemon: Pokemon):
+
     for game, entry_text in stats.items():
+        if not entry_text:
+            continue
         pkmn_game = fetch_pkmn_game(name=game.lower())
         pkmn_pokedex_entry = create_entry(
             pokemon_game=pkmn_game,
@@ -26,3 +29,4 @@ def create_pokedex_entries(stats:Dict[str, str], pokemon: Pokemon):
             text= entry_text
         )
         pkmn_pokedex_entry.save()
+    

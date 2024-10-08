@@ -51,6 +51,10 @@ class Pokemon(MyBaseModel):
 
     def __str__(self) -> str:
         return f'Pokemon: {self.name} - National id: {self.national_index}'
+    
+    def delete(self, *args, **kwargs):
+        self.abilities.clear()
+        super().delete(*args, **kwargs)
 
 
 class BaseStats(models.Model):
@@ -163,11 +167,12 @@ class Pokedex(MyBaseModel):
 
 class PokedexLocalIndex(models.Model):
     pokedex = models.ForeignKey(Pokedex, on_delete=models.SET_NULL, related_name='local_pokedex', null=True)
-    pokemon = models.OneToOneField(Pokemon, on_delete=models.CASCADE, related_name='pokemon_local')
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name='pokemon_local')
     index = models.PositiveIntegerField(null=False, blank=False)
 
     class Meta:
         db_table = 'local_pokedex'
+        unique_together = ('pokedex', 'pokemon')
 
 
 class EffectCategory(models.Model):

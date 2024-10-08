@@ -43,8 +43,6 @@ if __name__ == '__main__':
             print('looking for: ', pokemon_dir.stem)
             instance = fetch_pokemon_instance(pokemon_dir.stem)
             if not instance:
-                sleep(1)
-
                 instance = create_pkmn_model(stats=pokemon_dict['pokédex_data'], pokemon_name=pokemon_dir.stem,
                                              gen_num= gen_number)
                 
