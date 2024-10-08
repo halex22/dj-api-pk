@@ -22,7 +22,7 @@ else:
 
 
 
-ALLOWED_HOSTS = ['https://dj-api-pk-x28c.onrender.com']
+ALLOWED_HOSTS = ['dj-api-pk-x28c.onrender.com', 'localhost']
 
 
 # Application definition
